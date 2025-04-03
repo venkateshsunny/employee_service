@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.4'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.elms.employeeservice'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot Dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'  // For database integration
+    implementation 'org.springframework.boot:spring-boot-starter-web'      // For RESTful web services
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'        // For hot reload during development
+
+    // Database Driver for MySQL
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // Lombok to simplify boilerplate code
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Logging Dependencies
+    implementation 'org.slf4j:slf4j-api:2.0.9'                             // SLF4J API for logging
+    implementation 'ch.qos.logback:logback-classic'                  // Logback for SLF4J backend
+
+    // Testing Dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // For testing with Spring utilities
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'           // JUnit Launcher
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
